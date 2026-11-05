@@ -90,10 +90,10 @@ function App() {
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3">
           <a href="/" className="flex items-center gap-3">
             <img
-              src={LOGO}
-              alt="GAN 22 – Grande Archivio Napoli"
-              className="h-16 w-16 rounded-full object-contain"
-            />
+  src={LOGO}
+  alt="GAN 22 – Grande Archivio Napoli"
+  className="h-16 w-16 shrink-0 rounded-full object-cover"
+/>
             <span className="font-display text-xl leading-tight md:text-2xl">
               GAN 22 – Grande Archivio Napoli
             </span>
