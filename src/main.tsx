@@ -19,8 +19,7 @@ const BOOK =
 
 const PHONE = "tel:+390816582367";
 const WHATSAPP = "https://wa.me/34611244712";
-const LOGO = "/GAN_logo_nuovo.png";
-
+const LOGO = "/GAN_logo.jpg";
 const CDN = "https://cdn.krossbooking.com/borgo1313/images/1";
 
 const HERO =
