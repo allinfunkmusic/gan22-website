@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { useEffect } from "react";
 import { createRoot } from "react-dom/client";
 import {
   Wifi,
@@ -83,6 +83,35 @@ function BookBtn({
 }
 
 function App() {
+  useEffect(() => {
+    const scrollToHash = () => {
+      const id = decodeURIComponent(
+        window.location.hash.substring(1)
+      );
+
+      if (!id) return;
+
+      requestAnimationFrame(() => {
+        const element = document.getElementById(id);
+
+        if (element) {
+          element.scrollIntoView({
+            behavior: "auto",
+            block: "start",
+          });
+        }
+      });
+    };
+
+    scrollToHash();
+
+    window.addEventListener("hashchange", scrollToHash);
+
+    return () => {
+      window.removeEventListener("hashchange", scrollToHash);
+    };
+  }, []);
+
   return (
     <div className="min-h-screen bg-background font-sans text-foreground">
       <header className="sticky top-0 z-20 border-b border-border bg-card/95 backdrop-blur">
@@ -165,8 +194,8 @@ function App() {
           </div>
         </section>
 
-        <section id="servizi" className="bg-secondary">
-          <div className="mx-auto grid max-w-6xl grid-cols-2 gap-6 px-5 py-10 md:grid-cols-4">
+<section id="servizi" className="scroll-mt-24 bg-secondary"> 
+  <div className="mx-auto grid max-w-6xl grid-cols-2 gap-6 px-5 py-10 md:grid-cols-4">
             {services.map(({ icon: Icon, label }) => (
               <div key={label} className="flex items-center gap-3">
                 <span className="flex h-11 w-11 items-center justify-center rounded-full bg-primary text-primary-foreground">
@@ -178,8 +207,8 @@ function App() {
           </div>
         </section>
 
-        <section id="camere" className="mx-auto max-w-6xl px-5 py-20">
-          <p className="text-sm uppercase tracking-[0.3em] text-primary">
+<section id="camere" className="scroll-mt-24 mx-auto max-w-6xl px-5 py-20"> 
+  <p className="text-sm uppercase tracking-[0.3em] text-primary">
             Le nostre camere
           </p>
 
@@ -235,8 +264,8 @@ function App() {
           </div>
         </section>
 
-        <section id="dove" className="bg-ink text-ink-foreground">
-          <div className="mx-auto grid max-w-6xl gap-10 px-5 py-20 md:grid-cols-2">
+<section id="dove" className="scroll-mt-24 bg-ink text-ink-foreground"> 
+  <div className="mx-auto grid max-w-6xl gap-10 px-5 py-20 md:grid-cols-2">
             <div>
               <p className="text-sm uppercase tracking-[0.3em] text-primary">
                 Dove siamo e contatti
