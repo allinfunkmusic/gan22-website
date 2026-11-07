@@ -1,4 +1,3 @@
-
 import React, { useEffect } from "react";
 import { createRoot } from "react-dom/client";
 import {
@@ -14,8 +13,22 @@ import {
 } from "lucide-react";
 import "./styles.css";
 
+declare global {
+  interface Window {
+    gtag?: (...args: unknown[]) => void;
+  }
+}
+
 const BOOK =
   "https://grandearchivionapoli22.kross.travel/it/camere";
+
+const trackEvent = (eventName: string) => {
+  if (typeof window.gtag === "function") {
+    window.gtag("event", eventName, {
+      event_category: "Contatti e prenotazioni",
+    });
+  }
+};
 
 const PHONE = "tel:+390816582367";
 const WHATSAPP = "https://wa.me/34611244712";
@@ -65,6 +78,7 @@ const services = [
   { icon: Bath, label: "Bagno privato" },
 ];
 
+
 function BookBtn({
   children = "Prenota ora",
   className = "",
@@ -75,12 +89,14 @@ function BookBtn({
   return (
     <a
       href={BOOK}
+      onClick={() => trackEvent("click_prenota")}
       className={`inline-flex items-center justify-center rounded-md bg-primary px-6 py-3 font-medium text-primary-foreground transition-colors hover:bg-primary-hover ${className}`}
     >
       {children}
     </a>
   );
 }
+
 
 function App() {
   useEffect(() => {
@@ -139,26 +155,29 @@ function App() {
             </a>
           </nav>
 
-          <div className="flex items-center gap-3">
-            <a
-              href={PHONE}
-              aria-label="Chiama GAN 22"
-              title="Chiama GAN 22"
-              className="hidden text-primary hover:opacity-75 sm:inline-flex"
-            >
-              <Phone className="h-5 w-5" />
-            </a>
 
-            <a
-              href={WHATSAPP}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Contatta GAN 22 su WhatsApp"
-              title="WhatsApp GAN 22"
-              className="hidden text-primary hover:opacity-75 sm:inline-flex"
-            >
-              <MessageCircle className="h-5 w-5" />
-            </a>
+<div className="flex items-center gap-3">
+  <a
+    href={PHONE}
+    onClick={() => trackEvent("click_telefono")}
+    aria-label="Chiama GAN 22"
+    title="Chiama GAN 22"
+    className="hidden text-primary hover:opacity-75 sm:inline-flex"
+  >
+    <Phone className="h-5 w-5" />
+  </a>
+
+  <a
+    href={WHATSAPP}
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Contatta GAN 22 su WhatsApp"
+    title="WhatsApp GAN 22"
+    className="hidden text-primary hover:opacity-75 sm:inline-flex"
+  >
+    <MessageCircle className="h-5 w-5" />
+  </a>
+
 
             <BookBtn className="px-4 py-2 text-sm" />
           </div>
@@ -289,9 +308,15 @@ function App() {
 
                 <li className="flex gap-3">
                   <Phone className="h-5 w-5 shrink-0 text-primary" />
-                  <a href={PHONE} className="hover:text-primary">
-                    081 658 2367
-                  </a>
+                  
+<a
+  href={PHONE}
+  onClick={() => trackEvent("click_telefono")}
+  className="hover:text-primary"
+>
+  081 658 2367
+</a>
+
                 </li>
 
                 <li className="flex gap-3">
